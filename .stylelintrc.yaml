@@ -3,7 +3,6 @@ extends:
   - stylelint-config-standard-scss
   - stylelint-config-recess-order
 rules:
-  selector-class-pattern: null
   at-rule-no-unknown:
     - true
     - ignoreAtRules:
@@ -22,3 +21,8 @@ rules:
         - screen
         - tailwind
         - variants
+  selector-class-pattern: null
+  value-keyword-case:
+    - lower
+    - ignoreKeywords:
+        - /A(3|4|5)|(B|JIS-B)(4|5)/
