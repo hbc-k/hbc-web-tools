@@ -3,9 +3,7 @@
   "editor.quickSuggestions": {
     "strings": "on"
   },
-  "files.associations": {
-    "*.css": "tailwindcss"
-  },
   "css.validate": false,
-  "stylelint.validate": ["css", "tailwindcss"]
+  "scss.validate": false,
+  "stylelint.validate": ["css", "scss"]
 }
