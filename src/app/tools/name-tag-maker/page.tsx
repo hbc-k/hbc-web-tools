@@ -86,135 +86,174 @@ export default function Page() {
   return (
     <main>
       <div className={styles.controls}>
-        <button
-          onClick={() => {
-            addTag(emptyTagData);
-          }}
-        >
-          Add Tag
-        </button>
-        <button
-          onClick={() => {
-            removeTag(tags.length - 1);
-          }}
-        >
-          Remove Tag
-        </button>
-        <div>
+        <div className='my-2 flex gap-2'>
+          {/* 印刷ボタン */}
+          <button
+            className='ml-auto bg-cyan-600 font-bold text-white'
+            onClick={() => {
+              window.print();
+            }}
+          >
+            印刷
+          </button>
+          <button
+            className='bg-pink-600 font-bold text-white'
+            onClick={() => {
+              addTag(emptyTagData);
+            }}
+          >
+            追加
+          </button>
+        </div>
+        <div className='my-2'>
           {tags.map((tag, index) => (
-            <div key={index}>
-              <input
-                type='text'
-                value={tag.role?.ja}
-                onChange={(e) => {
-                  updateTag(index, { ...tag, role: { ...tag.role, ja: e.target.value } });
-                }}
-              />
-              <input
-                type='text'
-                value={tag.role?.en}
-                onChange={(e) => {
-                  updateTag(index, { ...tag, role: { ...tag.role, en: e.target.value } });
-                }}
-              />
-              <select
-                value={tag.grade?.type || 'undefined'}
-                onChange={(e) => {
-                  if (e.target.value === 'junior' || e.target.value === 'senior') {
+            <div key={index} className='my-1 flex gap-2'>
+              <div className='flex w-6 shrink-0 items-center'>
+                <span className='block'>{index + 1}.</span>
+              </div>
+              <div className='flex grow gap-1'>
+                <input
+                  className='w-28'
+                  type='text'
+                  value={tag.role?.ja || ''}
+                  placeholder='役職（日）'
+                  onChange={(e) => {
+                    updateTag(index, { ...tag, role: { ...tag.role, ja: e.target.value } });
+                  }}
+                />
+                <input
+                  className='w-full grow'
+                  type='text'
+                  value={tag.role?.en || ''}
+                  placeholder='役職（英）'
+                  onChange={(e) => {
+                    updateTag(index, { ...tag, role: { ...tag.role, en: e.target.value } });
+                  }}
+                />
+              </div>
+              <div className='flex grow gap-1'>
+                <select
+                  className='w-16 shrink-0'
+                  value={tag.grade?.type || 'undefined'}
+                  onChange={(e) => {
+                    if (e.target.value === 'junior' || e.target.value === 'senior') {
+                      updateTag(index, {
+                        ...tag,
+                        grade: {
+                          type: e.target.value === 'junior' ? 'junior' : 'senior',
+                          number:
+                            tag.grade?.number ||
+                            inputCache[index]?.grade?.number ||
+                            new Date().getFullYear() - 2003,
+                        },
+                        gradeColor: undefined,
+                      });
+                    } else {
+                      updateTag(index, { ...tag, grade: undefined, gradeColor: 0 });
+                    }
+                  }}
+                >
+                  <option value='undefined'>-</option>
+                  <option value='junior'>中学</option>
+                  <option value='senior'>高校</option>
+                </select>
+                <input
+                  className='w-16'
+                  type='number'
+                  value={
+                    tag.grade?.number ||
+                    inputCache[index]?.grade?.number ||
+                    new Date().getFullYear() - 2003
+                  }
+                  disabled={tag.grade?.type === undefined}
+                  onChange={(e) => {
+                    updateGradeNumberCache(index, Number(e.target.value));
+                    if (tag.grade?.type === undefined) return;
                     updateTag(index, {
                       ...tag,
                       grade: {
-                        type: e.target.value === 'junior' ? 'junior' : 'senior',
-                        number:
-                          tag.grade?.number ||
-                          inputCache[index]?.grade?.number ||
-                          new Date().getFullYear() - 2003,
+                        type: tag.grade.type,
+                        number: Number(e.target.value),
                       },
-                      gradeColor: undefined,
                     });
-                  } else {
-                    updateTag(index, { ...tag, grade: undefined, gradeColor: 0 });
-                  }
-                }}
+                  }}
+                />
+                <input
+                  className='w-full grow'
+                  type='text'
+                  value={tag.staffName?.ja || ''}
+                  placeholder='氏名（日）'
+                  onChange={(e) => {
+                    updateTag(index, {
+                      ...tag,
+                      staffName: { ...tag.staffName, ja: e.target.value },
+                    });
+                  }}
+                />
+                <input
+                  className='w-full grow'
+                  type='text'
+                  value={tag.staffName?.en || ''}
+                  placeholder='氏名（英）'
+                  onChange={(e) => {
+                    updateTag(index, {
+                      ...tag,
+                      staffName: { ...tag.staffName, en: e.target.value },
+                    });
+                  }}
+                />
+              </div>
+              <div className='flex gap-1'>
+                <select
+                  className='w-16'
+                  value={tag.gradeColor !== undefined ? tag.gradeColor : 'undefined'}
+                  onChange={(e) => {
+                    updateTag(index, {
+                      ...tag,
+                      gradeColor:
+                        Number(e.target.value) === 0
+                          ? 0
+                          : Number(e.target.value) === 1
+                          ? 1
+                          : Number(e.target.value) === 2
+                          ? 2
+                          : Number(e.target.value) === 3
+                          ? 3
+                          : Number(e.target.value) === 4
+                          ? 4
+                          : Number(e.target.value) === 5
+                          ? 5
+                          : Number(e.target.value) === 6
+                          ? 6
+                          : undefined,
+                    });
+                  }}
+                >
+                  <option value='undefined'>-</option>
+                  <option value={0}>0</option>
+                  <option value={1}>1</option>
+                  <option value={2}>2</option>
+                  <option value={3}>3</option>
+                  <option value={4}>4</option>
+                  <option value={5}>5</option>
+                  <option value={6}>6</option>
+                </select>
+                <input
+                  className='w-full max-w-[8rem] grow'
+                  type='text'
+                  value={tag.position || ''}
+                  placeholder='肩書（カスタム）'
+                  onChange={(e) => {
+                    updateTag(index, { ...tag, position: e.target.value || undefined });
+                  }}
+                />
+              </div>
+              <button
+                className='shrink-0 bg-slate-600 font-bold text-white'
+                onClick={() => removeTag(index)}
               >
-                <option value='undefined'>-</option>
-                <option value='junior'>中学</option>
-                <option value='senior'>高校</option>
-              </select>
-              <input
-                type='number'
-                value={
-                  tag.grade?.number ||
-                  inputCache[index]?.grade?.number ||
-                  new Date().getFullYear() - 2003
-                }
-                onChange={(e) => {
-                  updateGradeNumberCache(index, Number(e.target.value));
-                  if (tag.grade?.type === undefined) return;
-                  updateTag(index, {
-                    ...tag,
-                    grade: {
-                      type: tag.grade.type,
-                      number: Number(e.target.value),
-                    },
-                  });
-                }}
-              />
-              <input
-                type='text'
-                value={tag.staffName?.ja}
-                onChange={(e) => {
-                  updateTag(index, { ...tag, staffName: { ...tag.staffName, ja: e.target.value } });
-                }}
-              />
-              <input
-                type='text'
-                value={tag.staffName?.en}
-                onChange={(e) => {
-                  updateTag(index, { ...tag, staffName: { ...tag.staffName, en: e.target.value } });
-                }}
-              />
-              <select
-                value={tag.gradeColor !== undefined ? tag.gradeColor : 'undefined'}
-                onChange={(e) => {
-                  updateTag(index, {
-                    ...tag,
-                    gradeColor:
-                      Number(e.target.value) === 0
-                        ? 0
-                        : Number(e.target.value) === 1
-                        ? 1
-                        : Number(e.target.value) === 2
-                        ? 2
-                        : Number(e.target.value) === 3
-                        ? 3
-                        : Number(e.target.value) === 4
-                        ? 4
-                        : Number(e.target.value) === 5
-                        ? 5
-                        : Number(e.target.value) === 6
-                        ? 6
-                        : undefined,
-                  });
-                }}
-              >
-                <option value='undefined'>-</option>
-                <option value={0}>0</option>
-                <option value={1}>1</option>
-                <option value={2}>2</option>
-                <option value={3}>3</option>
-                <option value={4}>4</option>
-                <option value={5}>5</option>
-                <option value={6}>6</option>
-              </select>
-              <input
-                type='text'
-                value={tag.position}
-                onChange={(e) => {
-                  updateTag(index, { ...tag, position: e.target.value });
-                }}
-              />
-              <button onClick={() => removeTag(index)}>×</button>
+                削除
+              </button>
             </div>
           ))}
         </div>
