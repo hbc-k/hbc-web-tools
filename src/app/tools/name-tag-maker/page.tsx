@@ -18,6 +18,15 @@ type TagData = Partial<{
   position: TagProps['position'];
 }>;
 
+const rolePresets: NonNullable<TagData['role']>[] = [
+  { ja: '撮影', en: 'CAMERA CREW' },
+  { ja: '取材', en: 'PRESS' },
+  { ja: '放送', en: 'ANNOUNCEMENT' },
+  { ja: '音響', en: 'PUBLIC ADDRESS' },
+  { ja: '映像', en: 'VIDEO' },
+  { ja: '照明', en: 'LIGHTING' },
+];
+
 const exampleTagData: TagData = {
   role: { ja: '撮影', en: 'CAMERA CREW' },
   staffName: { ja: '県広 花子', en: 'KENHIRO Hanako' },
@@ -112,6 +121,23 @@ export default function Page() {
                 <span className='block'>{index + 1}.</span>
               </div>
               <div className='flex grow gap-1'>
+                <select
+                  className='w-16 shrink-0'
+                  value={tag.role?.ja || ''}
+                  onChange={(e) => {
+                    updateTag(index, {
+                      ...tag,
+                      role: rolePresets.find((role) => role.ja === e.target.value),
+                    });
+                  }}
+                >
+                  <option value=''>-</option>
+                  {rolePresets.map((role, index) => (
+                    <option key={index} value={role.ja}>
+                      {role.ja}
+                    </option>
+                  ))}
+                </select>
                 <input
                   className='w-28'
                   type='text'
@@ -134,7 +160,7 @@ export default function Page() {
               <div className='flex grow gap-1'>
                 <select
                   className='w-16 shrink-0'
-                  value={tag.grade?.type || 'undefined'}
+                  value={tag.grade?.type || ''}
                   onChange={(e) => {
                     if (e.target.value === 'junior' || e.target.value === 'senior') {
                       updateTag(index, {
@@ -153,7 +179,7 @@ export default function Page() {
                     }
                   }}
                 >
-                  <option value='undefined'>-</option>
+                  <option value=''>-</option>
                   <option value='junior'>中学</option>
                   <option value='senior'>高校</option>
                 </select>
