@@ -1,0 +1,15 @@
+:root {
+  --tag-width: 108mm;
+  --tag-height: 78mm;
+  --tag-margin-default: 3mm;
+  --tag-margin-top: var(--tag-margin-default);
+  --tag-margin-right: var(--tag-margin-default);
+  --tag-margin-bottom: var(--tag-margin-default);
+  --tag-margin-left: var(--tag-margin-default);
+  --tag-main-color: #5c0000;
+}
+
+@page {
+  size: A4 landscape;
+  margin: 0;
+}
