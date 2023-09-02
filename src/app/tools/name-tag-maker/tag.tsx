@@ -18,8 +18,8 @@ const bahnschrift = localFont({
 export type TagProps = {
   role: Partial<{ ja: string; en: string }>;
   staffName: Partial<{ ja: string; en: string }>;
-  position: string;
   gradeColor: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+  position: string;
 };
 
 export function Tag(props: Partial<TagProps>) {
