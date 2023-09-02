@@ -178,7 +178,7 @@
 
 .role {
   position: absolute;
-  top: calc(var(--frame-top-height) + 6mm);
+  top: calc(var(--frame-top-height) + 5mm);
   right: var(--tag-margin-right);
   left: var(--tag-margin-left);
   display: flex;
@@ -221,26 +221,22 @@
 
 .roleJa {
   font-family: var(--font-ja);
-  font-size: 48pt;
+  font-size: 52pt;
   font-weight: 900;
 
   &:has(> :nth-child(2)) {
-    letter-spacing: 10mm;
+    letter-spacing: 52pt;
   }
 
   &:has(> :nth-child(3)) {
-    letter-spacing: 5mm;
+    letter-spacing: calc(52pt / 3);
   }
 
   &:has(> :nth-child(4)) {
-    letter-spacing: 2mm;
+    letter-spacing: calc(52pt / 5);
   }
 
   &:has(> :nth-child(5)) {
-    letter-spacing: 1mm;
-  }
-
-  &:has(> :nth-child(6)) {
     letter-spacing: 0;
   }
 }
