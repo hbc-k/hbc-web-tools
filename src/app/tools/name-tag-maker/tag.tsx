@@ -32,6 +32,7 @@ export function Tag(props: Partial<TagProps>) {
 
   useEffect(() => {
     if (roleJaRef.current) {
+      roleJaRef.current.style.scale = '';
       roleJaRef.current.style.scale = `${Math.min(
         mmToPx(96) / roleJaRef.current.getBoundingClientRect().width,
         1,
