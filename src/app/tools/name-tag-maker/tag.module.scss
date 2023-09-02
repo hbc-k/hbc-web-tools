@@ -1,0 +1,364 @@
+.tag {
+  --font-ja: var(--font-noto-sans-jp), sans-serif;
+  --font-en: 'Bahnschrift', var(--font-bahnschrift), var(--font-noto-sans-jp), sans-serif;
+  --frame-top-content-height: 14mm;
+  --frame-top-padding-top: 2mm;
+  --frame-bottom-content-height: 6mm;
+  --frame-top-height: calc(
+    var(--tag-margin-top) + var(--frame-top-padding-top) + var(--frame-top-content-height)
+  );
+  --frame-bottom-height: calc(var(--frame-bottom-content-height) + var(--tag-margin-bottom));
+  --grade-color-1-from: hsl(206deg 100% 70%);
+  --grade-color-1-to: hsl(206deg 100% 96%);
+  --grade-color-2-from: hsl(96deg 100% 70%);
+  --grade-color-2-to: hsl(96deg 100% 96%);
+  --grade-color-3-from: hsl(346deg 100% 54%);
+  --grade-color-3-to: hsl(346deg 100% 96%);
+  --grade-color-4-from: hsl(244deg 100% 40%);
+  --grade-color-4-to: hsl(244deg 100% 92%);
+  --grade-color-5-from: hsl(174deg 100% 36%);
+  --grade-color-5-to: hsl(174deg 100% 92%);
+  --grade-color-6-from: hsl(346deg 100% 20%);
+  --grade-color-6-to: hsl(346deg 100% 92%);
+  --grade-color-undef-from: hsl(0deg 0% 30%);
+  --grade-color-undef-to: hsl(0deg 0% 90%);
+
+  position: relative;
+  width: calc(var(--tag-margin-left) + var(--tag-width) + var(--tag-margin-right));
+  height: calc(var(--tag-margin-top) + var(--tag-height) + var(--tag-margin-bottom));
+  overflow: hidden;
+  line-height: 1;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: content-box;
+  }
+}
+
+.background {
+  position: absolute;
+  inset: calc(var(--tag-margin-top) + var(--frame-top-padding-top) + 1mm) 0
+    calc(var(--frame-bottom-content-height) - 1mm);
+  overflow: hidden;
+  background-color: white;
+}
+
+.backgroundWrapper {
+  position: absolute;
+  inset: 0 var(--tag-margin-right) 0 var(--tag-margin-left);
+}
+
+.backgroundCyanBox {
+  position: absolute;
+  top: -14mm;
+  left: -30mm;
+  width: 50mm;
+  height: 50mm;
+  background-color: hsl(210deg 100% 80%);
+  transform: rotate(15deg);
+}
+
+.backgroundMagentaBox {
+  position: absolute;
+  right: -24mm;
+  bottom: -26mm;
+  width: 50mm;
+  height: 50mm;
+  background-color: hsl(345deg 100% 80%);
+  transform: rotate(-15deg);
+}
+
+.frameTop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--frame-top-height);
+}
+
+.frameTopBackground {
+  --logo-height: calc(var(--frame-top-content-height) - 3mm * 2);
+  --logo-width: calc(var(--logo-height) * (5 / 2));
+
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(
+    -10% -10%,
+    110% -10%,
+    110% calc(var(--tag-margin-top) + var(--frame-top-padding-top) + 2mm),
+    calc(var(--tag-margin-left) + 3mm + var(--logo-width) + 2mm + 4mm)
+      calc(var(--tag-margin-top) + var(--frame-top-padding-top) + 2mm),
+    calc(var(--tag-margin-left) + 3mm + var(--logo-width) + 2mm) 100%,
+    -10% 100%
+  );
+  background-color: var(--tag-main-color);
+}
+
+.frameTopForeground {
+  position: absolute;
+  inset: calc(var(--tag-margin-top) + var(--frame-top-padding-top)) var(--tag-margin-right) 0
+    var(--tag-margin-left);
+}
+
+.frameTopLogo {
+  position: absolute;
+  top: 3mm;
+  bottom: 3mm;
+  left: 3mm;
+
+  svg {
+    height: 100%;
+    fill: white;
+  }
+}
+
+.frameTopText {
+  position: absolute;
+  top: calc(3mm - 1mm);
+  right: 3mm;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-en);
+  font-size: 20pt;
+  font-weight: 700;
+  color: hsl(0deg 0 30%);
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.frameBottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: var(--frame-bottom-height);
+}
+
+.frameBottomBackground {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--tag-main-color);
+}
+
+.frameBottomForeground {
+  position: absolute;
+  inset: 0 var(--tag-margin-right) var(--tag-margin-bottom) var(--tag-margin-left);
+}
+
+.frameBottomText {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -3mm;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-en);
+  color: white;
+  text-transform: lowercase;
+  white-space: nowrap;
+
+  span {
+    margin-right: 10pt;
+  }
+}
+
+.frameBottomTextWrapper {
+  height: calc(10pt * 0.6);
+}
+
+.frameBottomTextScaler {
+  font-size: 10pt;
+  transform-origin: left top;
+  scale: 0.6;
+}
+
+.role {
+  position: absolute;
+  top: calc(var(--frame-top-height) + 6mm);
+  right: var(--tag-margin-right);
+  left: var(--tag-margin-left);
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.roleContent {
+  max-width: calc(var(--tag-width) - 3mm * 2);
+
+  > :not(hr) {
+    padding: 0 3mm;
+  }
+
+  hr {
+    margin: 0 auto;
+    border-color: black;
+
+    &:first-child,
+    &:last-child {
+      display: none;
+    }
+  }
+}
+
+.roleItem {
+  display: flex;
+  justify-content: center;
+  margin: 3mm 0;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.roleJa {
+  font-family: var(--font-ja);
+  font-size: 48pt;
+  font-weight: 900;
+
+  &:has(> :nth-child(2)) {
+    letter-spacing: 10mm;
+  }
+
+  &:has(> :nth-child(3)) {
+    letter-spacing: 5mm;
+  }
+
+  &:has(> :nth-child(4)) {
+    letter-spacing: 2mm;
+  }
+
+  &:has(> :nth-child(5)) {
+    letter-spacing: 1mm;
+  }
+
+  &:has(> :nth-child(6)) {
+    letter-spacing: 0;
+  }
+}
+
+.roleJaChar {
+  &:last-child {
+    letter-spacing: 0;
+  }
+}
+
+.roleEn {
+  font-family: var(--font-en);
+  font-size: 20pt;
+  font-weight: 300;
+}
+
+.staffName {
+  position: absolute;
+  bottom: calc(var(--frame-bottom-height) + 3mm);
+  left: calc(var(--tag-margin-left) + 3mm);
+  display: flex;
+}
+
+.gradeColor {
+  width: 2mm;
+  margin-right: 2mm;
+  background-image: linear-gradient(
+    to top,
+    var(--grade-color-from, var(--grade-color-undef-from)),
+    var(--grade-color-to, var(--grade-color-undef-to))
+  );
+}
+
+.gradeColor1 {
+  --grade-color-from: var(--grade-color-1-from);
+  --grade-color-to: var(--grade-color-1-to);
+}
+
+.gradeColor2 {
+  --grade-color-from: var(--grade-color-2-from);
+  --grade-color-to: var(--grade-color-2-to);
+}
+
+.gradeColor3 {
+  --grade-color-from: var(--grade-color-3-from);
+  --grade-color-to: var(--grade-color-3-to);
+}
+
+.gradeColor4 {
+  --grade-color-from: var(--grade-color-4-from);
+  --grade-color-to: var(--grade-color-4-to);
+}
+
+.gradeColor5 {
+  --grade-color-from: var(--grade-color-5-from);
+  --grade-color-to: var(--grade-color-5-to);
+}
+
+.gradeColor6 {
+  --grade-color-from: var(--grade-color-6-from);
+  --grade-color-to: var(--grade-color-6-to);
+}
+
+.staffNameTextItem {
+  margin: 1mm 0;
+
+  &:first-child {
+    margin-top: 0.5mm;
+  }
+
+  &:last-child {
+    margin-bottom: 0.5mm;
+  }
+}
+
+.staffNamePosition {
+  font-family: var(--font-ja);
+  font-size: 10pt;
+  font-weight: 300;
+}
+
+.staffNamePositionWrapper {
+  height: calc(10pt * 0.8);
+}
+
+.staffNamePositionScaler {
+  font-size: 10pt;
+  transform-origin: left top;
+  scale: 0.8;
+}
+
+.staffNameJa {
+  padding-bottom: 0.4mm;
+  font-family: var(--font-ja);
+  font-size: 12pt;
+  font-weight: 500;
+}
+
+.staffNameEn {
+  font-family: var(--font-en);
+  font-size: 10pt;
+  font-weight: 300;
+}
+
+.orgName {
+  position: absolute;
+  right: calc(var(--tag-margin-right) + 3mm);
+  bottom: calc(var(--frame-bottom-height) + 3mm);
+  margin-bottom: -0.4mm;
+  font-family: var(--font-ja);
+  font-size: 10pt;
+  line-height: 1.8;
+  text-align: right;
+  transform-origin: right bottom;
+  scale: 0.6;
+
+  span {
+    padding: 0 0.5mm;
+    background-color: white;
+  }
+}
