@@ -31,7 +31,8 @@
   }
 
   @media screen {
-    @apply bg-slate-600 py-2;
+    padding: 0.5rem 0;
+    background-color: #5f6368;
   }
 }
 
@@ -104,34 +105,5 @@
 
   > :nth-child(n + 3) {
     --tag-margin-top: 0mm;
-  }
-}
-
-.controls {
-  @apply mx-auto my-4 max-w-6xl px-2;
-
-  input,
-  select {
-    @apply block rounded border py-0.5;
-  }
-
-  input {
-    @apply px-1.5;
-
-    &:disabled {
-      @apply bg-gray-200;
-    }
-  }
-
-  select {
-    @apply px-0.5;
-
-    &:disabled {
-      @apply bg-gray-200;
-    }
-  }
-
-  button {
-    @apply rounded px-1 py-0.5 transition-colors;
   }
 }

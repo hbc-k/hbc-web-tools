@@ -124,10 +124,10 @@ export default function Page() {
 
   return (
     <main>
-      <div className={styles.controls}>
+      <div className='mx-auto my-4 max-w-7xl px-2'>
         <div className='my-2 flex gap-2'>
           <button
-            className='ml-auto mr-2 w-16 bg-red-600 font-bold text-white hover:bg-red-700 active:bg-red-500'
+            className='ml-auto mr-2 w-16 rounded bg-red-600 px-1 py-0.5 font-bold text-white transition-colors hover:bg-red-500 active:bg-red-700'
             onClick={() => {
               setTags([emptyTagData]);
               setInputCache([{ grade: { number: new Date().getFullYear() - 2003 } }]);
@@ -137,7 +137,7 @@ export default function Page() {
             リセット
           </button>
           <button
-            className='w-12 bg-cyan-600 font-bold text-white hover:bg-cyan-700 active:bg-cyan-500'
+            className='w-12 rounded bg-cyan-600 px-1 py-0.5 font-bold text-white transition-colors hover:bg-cyan-500 active:bg-cyan-700'
             onClick={() => {
               window.print();
             }}
@@ -145,7 +145,7 @@ export default function Page() {
             印刷
           </button>
           <button
-            className='w-12 bg-pink-600 font-bold text-white hover:bg-pink-700 active:bg-pink-500'
+            className='w-12 rounded bg-pink-600 px-1 py-0.5 font-bold text-white transition-colors hover:bg-pink-500 active:bg-pink-700'
             onClick={() => {
               addTag(emptyTagData);
             }}
@@ -161,7 +161,7 @@ export default function Page() {
               </div>
               <div className='flex grow gap-1'>
                 <select
-                  className='w-16 shrink-0'
+                  className='block w-16 shrink-0 rounded border px-0.5 py-0.5'
                   value={tag.role?.ja || ''}
                   onChange={(e) => {
                     updateTag(index, {
@@ -178,7 +178,7 @@ export default function Page() {
                   ))}
                 </select>
                 <input
-                  className='w-28'
+                  className='block w-28 rounded border px-1.5 py-0.5'
                   type='text'
                   value={tag.role?.ja || ''}
                   placeholder='役職（日）'
@@ -187,7 +187,7 @@ export default function Page() {
                   }}
                 />
                 <input
-                  className='w-full grow'
+                  className='block w-full grow rounded border px-1.5 py-0.5'
                   type='text'
                   value={tag.role?.en || ''}
                   placeholder='役職（英）'
@@ -198,7 +198,7 @@ export default function Page() {
               </div>
               <div className='flex grow gap-1'>
                 <select
-                  className='w-16 shrink-0'
+                  className='block w-16 shrink-0 rounded border px-0.5 py-0.5'
                   value={tag.grade?.type || ''}
                   onChange={(e) => {
                     if (e.target.value === 'junior' || e.target.value === 'senior') {
@@ -223,7 +223,7 @@ export default function Page() {
                   <option value='senior'>高校</option>
                 </select>
                 <input
-                  className='w-16'
+                  className='block w-16 rounded border px-1.5 py-0.5 disabled:bg-gray-200'
                   type='number'
                   value={
                     tag.grade?.number ||
@@ -244,7 +244,7 @@ export default function Page() {
                   }}
                 />
                 <input
-                  className='w-full grow'
+                  className='block w-full grow rounded border px-1.5 py-0.5'
                   type='text'
                   value={tag.staffName?.ja || ''}
                   placeholder='氏名（日）'
@@ -256,7 +256,7 @@ export default function Page() {
                   }}
                 />
                 <input
-                  className='w-full grow'
+                  className='block w-full grow rounded border px-1.5 py-0.5'
                   type='text'
                   value={tag.staffName?.en || ''}
                   placeholder='氏名（英）'
@@ -270,7 +270,7 @@ export default function Page() {
               </div>
               <div className='flex gap-1'>
                 <select
-                  className='w-12 shrink-0'
+                  className='block w-12 shrink-0 rounded border px-0.5 py-0.5'
                   value={tag.gradeColor !== undefined ? tag.gradeColor : 'undefined'}
                   onChange={(e) => {
                     updateTag(index, {
@@ -304,7 +304,7 @@ export default function Page() {
                   <option value={6}>6</option>
                 </select>
                 <input
-                  className='w-full max-w-[8rem] grow'
+                  className='block w-full max-w-[8rem] grow rounded border px-1.5 py-0.5'
                   type='text'
                   value={tag.position || ''}
                   placeholder='肩書（カスタム）'
@@ -314,7 +314,7 @@ export default function Page() {
                 />
               </div>
               <button
-                className='w-12 shrink-0 bg-slate-600 font-bold text-white hover:bg-slate-700 active:bg-slate-500'
+                className='w-12 shrink-0 rounded bg-slate-600 px-1 py-0.5 font-bold text-white transition-colors hover:bg-slate-500 active:bg-slate-700'
                 onClick={() => removeTag(index)}
               >
                 削除
