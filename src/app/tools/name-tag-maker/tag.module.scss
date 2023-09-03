@@ -27,6 +27,7 @@
   width: calc(var(--tag-margin-left) + var(--tag-width) + var(--tag-margin-right));
   height: calc(var(--tag-margin-top) + var(--tag-height) + var(--tag-margin-bottom));
   overflow: hidden;
+  font-feature-settings: 'palt';
   line-height: 1;
 
   *,
