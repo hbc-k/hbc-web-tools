@@ -270,7 +270,7 @@ export default function Page() {
               </div>
               <div className='flex gap-1'>
                 <select
-                  className='w-16'
+                  className='w-12 shrink-0'
                   value={tag.gradeColor !== undefined ? tag.gradeColor : 'undefined'}
                   onChange={(e) => {
                     updateTag(index, {
