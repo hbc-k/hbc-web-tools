@@ -52,20 +52,20 @@
 
 .backgroundCyanBox {
   position: absolute;
-  top: -14mm;
-  left: -30mm;
-  width: 50mm;
-  height: 50mm;
+  top: 8mm;
+  left: -8mm;
+  width: 25mm;
+  height: 30mm;
   background-color: hsl(210deg 100% 80%);
   transform: rotate(15deg);
 }
 
 .backgroundMagentaBox {
   position: absolute;
-  right: -24mm;
-  bottom: -26mm;
-  width: 50mm;
-  height: 50mm;
+  right: -7mm;
+  bottom: 0;
+  width: 36mm;
+  height: 22mm;
   background-color: hsl(345deg 100% 80%);
   transform: rotate(-15deg);
 }
