@@ -12,10 +12,6 @@
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
   break-after: page;
-
-  &:last-child {
-    break-after: auto;
-  }
 }
 
 .printArea {
