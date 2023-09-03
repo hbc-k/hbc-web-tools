@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './style.scss';
 import styles from './style.module.scss';
 import { Tag, TagProps } from './tag';
@@ -29,8 +29,8 @@ const rolePresets: NonNullable<TagData['role']>[] = [
 
 const exampleTagData: TagData = {
   role: { ja: '撮影', en: 'CAMERA CREW' },
-  staffName: { ja: '県広 花子', en: 'KENHIRO Hanako' },
   grade: { type: 'senior', number: 18 },
+  staffName: { ja: '県広 花子', en: 'KENHIRO Hanako' },
 };
 
 const emptyTagData: TagData = {
@@ -46,6 +46,8 @@ export default function Page() {
   const [inputCache, setInputCache] = useState<{ grade: Partial<TagData['grade']> }[]>([
     { grade: exampleTagData.grade },
   ]);
+  const [backup, setBackup] = useState<string>('');
+  const file = useRef<HTMLInputElement>(null);
 
   const addTag = (tag: TagData) => {
     setTags((tags) => {
@@ -127,7 +129,7 @@ export default function Page() {
       <div className='mx-auto my-4 max-w-7xl px-2'>
         <div className='my-2 flex gap-2'>
           <button
-            className='ml-auto mr-2 w-16 rounded bg-red-600 px-1 py-0.5 font-bold text-white transition-colors hover:bg-red-500 active:bg-red-700'
+            className='ml-auto mr-2 h-8 rounded bg-red-600 px-2 font-bold text-white transition-colors hover:bg-red-500 active:bg-red-700'
             onClick={() => {
               setTags([emptyTagData]);
               setInputCache([{ grade: { number: new Date().getFullYear() - 2003 } }]);
@@ -137,7 +139,7 @@ export default function Page() {
             リセット
           </button>
           <button
-            className='w-12 rounded bg-cyan-600 px-1 py-0.5 font-bold text-white transition-colors hover:bg-cyan-500 active:bg-cyan-700'
+            className='h-8 rounded bg-cyan-600 px-2 py-0.5 font-bold text-white transition-colors hover:bg-cyan-500 active:bg-cyan-700'
             onClick={() => {
               window.print();
             }}
@@ -145,7 +147,7 @@ export default function Page() {
             印刷
           </button>
           <button
-            className='w-12 rounded bg-pink-600 px-1 py-0.5 font-bold text-white transition-colors hover:bg-pink-500 active:bg-pink-700'
+            className='h-8 rounded bg-pink-600 px-2 py-0.5 font-bold text-white transition-colors hover:bg-pink-500 active:bg-pink-700'
             onClick={() => {
               addTag(emptyTagData);
             }}
@@ -348,6 +350,90 @@ export default function Page() {
             </div>
           </section>
         ))}
+      </div>
+      <div className='mx-auto my-4 max-w-7xl px-2'>
+        <textarea
+          className='block w-full rounded border px-1.5 py-0.5'
+          value={backup}
+          onChange={(e) => {
+            setBackup(e.target.value);
+          }}
+        />
+        <div className='my-2 flex gap-2'>
+          <button
+            className='ml-auto h-8 rounded bg-slate-600 px-2 font-bold text-white transition-colors hover:bg-slate-500 active:bg-slate-700'
+            onClick={() => {
+              setBackup(JSON.stringify(tags));
+            }}
+          >
+            エクスポート
+          </button>
+          <button
+            className='mr-2 h-8 rounded bg-slate-600 px-2 font-bold text-white transition-colors hover:bg-slate-500 active:bg-slate-700 disabled:bg-slate-400'
+            disabled={backup === ''}
+            onClick={() => {
+              const blob = new Blob([JSON.stringify(tags)], { type: 'application/json' });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = `イベント名札メーカー_${((date) =>
+                date.getFullYear() +
+                String(date.getMonth() + 1).padStart(2, '0') +
+                String(date.getDate()).padStart(2, '0') +
+                String(date.getHours()).padStart(2, '0') +
+                String(date.getMinutes()).padStart(2, '0') +
+                String(date.getSeconds()).padStart(2, '0'))(new Date())}.json`;
+              a.click();
+              a.remove();
+              URL.revokeObjectURL(url);
+            }}
+          >
+            ファイルに保存
+          </button>
+          <button
+            className='h-8 rounded bg-slate-600 px-2 font-bold text-white transition-colors hover:bg-slate-500 active:bg-slate-700'
+            onClick={() => {
+              file.current?.click();
+            }}
+          >
+            ファイルを開く
+          </button>
+          <input
+            ref={file}
+            className='hidden'
+            type='file'
+            accept='application/json'
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (!file) return;
+              const reader = new FileReader();
+              reader.onload = () => {
+                setBackup(reader.result as string);
+              };
+              reader.readAsText(file);
+            }}
+          />
+          <button
+            className='h-8 rounded bg-slate-600 px-2 font-bold text-white transition-colors hover:bg-slate-500 active:bg-slate-700 disabled:bg-slate-400'
+            disabled={backup === ''}
+            onClick={() => {
+              try {
+                const importedTags: TagData[] = JSON.parse(backup);
+                setTags(importedTags);
+                setInputCache(
+                  importedTags.map((tag) => ({
+                    grade: { number: tag.grade?.number || new Date().getFullYear() - 2003 },
+                  })),
+                );
+                localStorage.setItem('tags', JSON.stringify(importedTags));
+              } catch (e) {
+                alert('インポートに失敗しました。');
+              }
+            }}
+          >
+            インポート
+          </button>
+        </div>
       </div>
     </main>
   );
