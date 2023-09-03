@@ -39,6 +39,7 @@ export function Tag(props: Partial<TagProps>) {
       )} 1`;
     }
     if (roleEnRef.current) {
+      roleEnRef.current.style.scale = '';
       roleEnRef.current.style.scale = `${Math.min(
         mmToPx(96) / roleEnRef.current.getBoundingClientRect().width,
         1,
