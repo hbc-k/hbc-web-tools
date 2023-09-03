@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './style.scss';
 import styles from './style.module.scss';
 import { Tag, TagProps } from './tag';
@@ -43,24 +43,41 @@ const emptyTagData: TagData = {
 
 export default function Page() {
   const [tags, setTags] = useState<TagData[]>([exampleTagData]);
-  const [inputCache, setInputCache] = useState<{ grade: Partial<TagData['grade']> }[]>([]);
+  const [inputCache, setInputCache] = useState<{ grade: Partial<TagData['grade']> }[]>([
+    { grade: exampleTagData.grade },
+  ]);
 
   const addTag = (tag: TagData) => {
-    setTags((tags) => [...tags, tag]);
+    setTags((tags) => {
+      const newTags = [...tags, tag];
+      localStorage.setItem('tags', JSON.stringify(newTags));
+      return newTags;
+    });
     setInputCache((cache) => [
       ...cache,
       { grade: { number: tag.grade?.number || new Date().getFullYear() - 2003 } },
     ]);
   };
+
   const removeTag = (index: number) => {
-    setTags((tags) => tags.filter((_, i) => i !== index));
+    setTags((tags) => {
+      if (tags.length === 1) {
+        localStorage.removeItem('tags');
+        return [emptyTagData];
+      }
+      const newTags = tags.filter((_, i) => i !== index);
+      localStorage.setItem('tags', JSON.stringify(newTags));
+      return newTags;
+    });
     setInputCache((cache) => cache.filter((_, i) => i !== index));
-    if (tags.length === 1) {
-      addTag(emptyTagData);
-    }
   };
+
   const updateTag = (index: number, tag: TagData) => {
-    setTags((tags) => tags.map((t, i) => (i === index ? tag : t)));
+    setTags((tags) => {
+      const newTags = tags.map((t, i) => (i === index ? tag : t));
+      localStorage.setItem('tags', JSON.stringify(newTags));
+      return newTags;
+    });
   };
 
   const updateGradeNumberCache = (index: number, number: number) => {
@@ -92,13 +109,35 @@ export default function Page() {
     ),
   );
 
+  useEffect(() => {
+    const tags = localStorage.getItem('tags');
+    if (tags) {
+      const cachedTags: TagData[] = JSON.parse(tags);
+      setTags(cachedTags);
+      setInputCache(
+        cachedTags.map((tag) => ({
+          grade: { number: tag.grade?.number || new Date().getFullYear() - 2003 },
+        })),
+      );
+    }
+  }, []);
+
   return (
     <main>
       <div className={styles.controls}>
         <div className='my-2 flex gap-2'>
-          {/* 印刷ボタン */}
           <button
-            className='ml-auto bg-cyan-600 font-bold text-white'
+            className='ml-auto mr-2 w-16 bg-red-600 font-bold text-white'
+            onClick={() => {
+              setTags([emptyTagData]);
+              setInputCache([{ grade: { number: new Date().getFullYear() - 2003 } }]);
+              localStorage.removeItem('tags');
+            }}
+          >
+            リセット
+          </button>
+          <button
+            className='w-12 bg-cyan-600 font-bold text-white'
             onClick={() => {
               window.print();
             }}
@@ -106,7 +145,7 @@ export default function Page() {
             印刷
           </button>
           <button
-            className='bg-pink-600 font-bold text-white'
+            className='w-12 bg-pink-600 font-bold text-white'
             onClick={() => {
               addTag(emptyTagData);
             }}
@@ -275,7 +314,7 @@ export default function Page() {
                 />
               </div>
               <button
-                className='shrink-0 bg-slate-600 font-bold text-white'
+                className='w-12 shrink-0 bg-slate-600 font-bold text-white'
                 onClick={() => removeTag(index)}
               >
                 削除
