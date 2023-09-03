@@ -126,34 +126,55 @@ export default function Page() {
 
   return (
     <main>
-      <div className='mx-auto my-4 max-w-7xl px-2'>
-        <div className='my-2 flex gap-2'>
-          <button
-            className='ml-auto mr-2 rounded-md bg-slate-600 p-2 font-bold text-white transition-colors hover:bg-slate-500 active:bg-slate-700'
-            onClick={() => {
-              setTags([emptyTagData]);
-              setInputCache([{ grade: { number: new Date().getFullYear() - 2003 } }]);
-              localStorage.removeItem('tags');
-            }}
+      <div className='mx-auto my-6 max-w-7xl px-4'>
+        <h1 className='mb-2 text-3xl font-bold'>イベント名札メーカー</h1>
+        <p>イベント用の名札を制作するツールです。</p>
+        <p>
+          現在は（株）大創産業の販売する「
+          <a
+            className='text-blue-500 hover:text-blue-400'
+            href='https://jp.daisonet.com/products/4984343925328'
+            target='_blank'
           >
-            リセット
-          </button>
-          <button
-            className='rounded-md bg-cyan-600 p-2 py-0.5 font-bold text-white transition-colors hover:bg-cyan-500 active:bg-cyan-700'
-            onClick={() => {
-              window.print();
-            }}
-          >
-            印刷
-          </button>
-          <button
-            className='rounded-md bg-pink-600 p-2 py-0.5 font-bold text-white transition-colors hover:bg-pink-500 active:bg-pink-700'
-            onClick={() => {
-              addTag(emptyTagData);
-            }}
-          >
-            追加
-          </button>
+            名札 イベント用 ひも吊下げ 10枚セット
+          </a>
+          」にのみ対応しています。
+        </p>
+      </div>
+      <div className='mx-auto my-6 max-w-7xl px-4'>
+        <div className='my-2 flex items-end justify-between'>
+          <div>
+            <h2 className='mb-1 text-xl font-bold'>入力欄</h2>
+            <p>入力した内容はブラウザ上に自動的に保存されます。</p>
+          </div>
+          <div className='flex'>
+            <button
+              className='mr-4 rounded-md bg-slate-600 p-2 font-bold text-white transition-colors hover:bg-slate-500 active:bg-slate-700'
+              onClick={() => {
+                setTags([emptyTagData]);
+                setInputCache([{ grade: { number: new Date().getFullYear() - 2003 } }]);
+                localStorage.removeItem('tags');
+              }}
+            >
+              リセット
+            </button>
+            <button
+              className='mr-2 rounded-md bg-cyan-600 p-2 py-0.5 font-bold text-white transition-colors hover:bg-cyan-500 active:bg-cyan-700'
+              onClick={() => {
+                window.print();
+              }}
+            >
+              印刷
+            </button>
+            <button
+              className='rounded-md bg-pink-600 p-2 py-0.5 font-bold text-white transition-colors hover:bg-pink-500 active:bg-pink-700'
+              onClick={() => {
+                addTag(emptyTagData);
+              }}
+            >
+              追加
+            </button>
+          </div>
         </div>
         <div className='my-2'>
           {tags.map((tag, index) => (
@@ -351,7 +372,16 @@ export default function Page() {
           </section>
         ))}
       </div>
-      <div className='mx-auto my-4 max-w-7xl px-2'>
+      <div className='mx-auto my-6 max-w-7xl px-4'>
+        <div className='my-2'>
+          <h2 className='mb-1 text-xl font-bold'>インポート・エクスポート</h2>
+          <p>
+            エクスポートをクリックすると下のエリアに入力欄の内容がJSONデータとして反映されます。コピーペーストまたは保存ボタンで保存してください。
+          </p>
+          <p>
+            下のエリアにエクスポートしたデータを貼り付けるかファイルを開いたあと、インポートをクリックすることでデータをインポートできます。
+          </p>
+        </div>
         <textarea
           className='block w-full rounded border px-1.5 py-0.5'
           value={backup}
