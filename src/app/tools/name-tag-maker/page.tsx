@@ -129,7 +129,7 @@ export default function Page() {
       <div className='mx-auto my-4 max-w-7xl px-2'>
         <div className='my-2 flex gap-2'>
           <button
-            className='ml-auto mr-2 h-8 rounded bg-red-600 px-2 font-bold text-white transition-colors hover:bg-red-500 active:bg-red-700'
+            className='ml-auto mr-2 rounded-md bg-slate-600 p-2 font-bold text-white transition-colors hover:bg-slate-500 active:bg-slate-700'
             onClick={() => {
               setTags([emptyTagData]);
               setInputCache([{ grade: { number: new Date().getFullYear() - 2003 } }]);
@@ -139,7 +139,7 @@ export default function Page() {
             リセット
           </button>
           <button
-            className='h-8 rounded bg-cyan-600 px-2 py-0.5 font-bold text-white transition-colors hover:bg-cyan-500 active:bg-cyan-700'
+            className='rounded-md bg-cyan-600 p-2 py-0.5 font-bold text-white transition-colors hover:bg-cyan-500 active:bg-cyan-700'
             onClick={() => {
               window.print();
             }}
@@ -147,7 +147,7 @@ export default function Page() {
             印刷
           </button>
           <button
-            className='h-8 rounded bg-pink-600 px-2 py-0.5 font-bold text-white transition-colors hover:bg-pink-500 active:bg-pink-700'
+            className='rounded-md bg-pink-600 p-2 py-0.5 font-bold text-white transition-colors hover:bg-pink-500 active:bg-pink-700'
             onClick={() => {
               addTag(emptyTagData);
             }}
@@ -306,7 +306,7 @@ export default function Page() {
                   <option value={6}>6</option>
                 </select>
                 <input
-                  className='block w-full max-w-[8rem] grow rounded border px-1.5 py-0.5'
+                  className='block w-full max-w-[12rem] grow rounded border px-1.5 py-0.5'
                   type='text'
                   value={tag.position || ''}
                   placeholder='肩書（カスタム）'
@@ -316,7 +316,7 @@ export default function Page() {
                 />
               </div>
               <button
-                className='w-12 shrink-0 rounded bg-slate-600 px-1 py-0.5 font-bold text-white transition-colors hover:bg-slate-500 active:bg-slate-700'
+                className='shrink-0 rounded bg-slate-600 px-2 font-bold text-white transition-colors hover:bg-slate-500 active:bg-slate-700'
                 onClick={() => removeTag(index)}
               >
                 削除
@@ -361,7 +361,7 @@ export default function Page() {
         />
         <div className='my-2 flex gap-2'>
           <button
-            className='ml-auto h-8 rounded bg-slate-600 px-2 font-bold text-white transition-colors hover:bg-slate-500 active:bg-slate-700'
+            className='ml-auto rounded-md bg-slate-600 p-2 font-bold text-white transition-colors hover:bg-slate-500 active:bg-slate-700'
             onClick={() => {
               setBackup(JSON.stringify(tags));
             }}
@@ -369,7 +369,7 @@ export default function Page() {
             エクスポート
           </button>
           <button
-            className='mr-2 h-8 rounded bg-slate-600 px-2 font-bold text-white transition-colors hover:bg-slate-500 active:bg-slate-700 disabled:bg-slate-400'
+            className='mr-2 rounded-md bg-slate-600 p-2 font-bold text-white transition-colors hover:bg-slate-500 active:bg-slate-700 disabled:bg-slate-400'
             disabled={backup === ''}
             onClick={() => {
               const blob = new Blob([JSON.stringify(tags)], { type: 'application/json' });
@@ -391,7 +391,7 @@ export default function Page() {
             ファイルに保存
           </button>
           <button
-            className='h-8 rounded bg-slate-600 px-2 font-bold text-white transition-colors hover:bg-slate-500 active:bg-slate-700'
+            className='rounded-md bg-slate-600 p-2 font-bold text-white transition-colors hover:bg-slate-500 active:bg-slate-700'
             onClick={() => {
               file.current?.click();
             }}
@@ -414,7 +414,7 @@ export default function Page() {
             }}
           />
           <button
-            className='h-8 rounded bg-slate-600 px-2 font-bold text-white transition-colors hover:bg-slate-500 active:bg-slate-700 disabled:bg-slate-400'
+            className='rounded-md bg-slate-600 p-2 font-bold text-white transition-colors hover:bg-slate-500 active:bg-slate-700 disabled:bg-slate-400'
             disabled={backup === ''}
             onClick={() => {
               try {
