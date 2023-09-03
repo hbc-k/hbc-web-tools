@@ -31,6 +31,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body
         className={`${notoColorEmoji.variable} ${notoSansJp.variable} ${notoSansMono.variable}`}
       >
+        <header className='border-b'>
+          <div className='mx-auto max-w-7xl px-4 py-2'>
+            <h1 className='font-mono text-3xl'>hbc-web-app</h1>
+          </div>
+        </header>
+        {children}
       </body>
     </html>
   );
