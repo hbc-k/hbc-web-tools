@@ -4,8 +4,8 @@ import { Noto_Color_Emoji, Noto_Sans_JP, Noto_Sans_Mono } from 'next/font/google
 
 export const metadata: Metadata = {
   title: {
-    default: 'hbc-web-app',
-    template: '%s | hbc-web-app',
+    default: 'hbc-web-tools',
+    template: '%s | hbc-web-tools',
   },
 };
 
@@ -34,7 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <header className='border-b'>
           <div className='mx-auto max-w-7xl px-4 py-2'>
-            <h1 className='font-mono text-3xl'>hbc-web-app</h1>
+            <h1 className='font-mono text-2xl'>hbc-web-tools</h1>
           </div>
         </header>
         {children}
