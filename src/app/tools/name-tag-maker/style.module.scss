@@ -132,6 +132,6 @@
   }
 
   button {
-    @apply rounded px-1 py-0.5;
+    @apply rounded px-1 py-0.5 transition-colors;
   }
 }

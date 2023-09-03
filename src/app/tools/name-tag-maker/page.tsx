@@ -127,7 +127,7 @@ export default function Page() {
       <div className={styles.controls}>
         <div className='my-2 flex gap-2'>
           <button
-            className='ml-auto mr-2 w-16 bg-red-600 font-bold text-white'
+            className='ml-auto mr-2 w-16 bg-red-600 font-bold text-white hover:bg-red-700 active:bg-red-500'
             onClick={() => {
               setTags([emptyTagData]);
               setInputCache([{ grade: { number: new Date().getFullYear() - 2003 } }]);
@@ -137,7 +137,7 @@ export default function Page() {
             リセット
           </button>
           <button
-            className='w-12 bg-cyan-600 font-bold text-white'
+            className='w-12 bg-cyan-600 font-bold text-white hover:bg-cyan-700 active:bg-cyan-500'
             onClick={() => {
               window.print();
             }}
@@ -145,7 +145,7 @@ export default function Page() {
             印刷
           </button>
           <button
-            className='w-12 bg-pink-600 font-bold text-white'
+            className='w-12 bg-pink-600 font-bold text-white hover:bg-pink-700 active:bg-pink-500'
             onClick={() => {
               addTag(emptyTagData);
             }}
@@ -314,7 +314,7 @@ export default function Page() {
                 />
               </div>
               <button
-                className='w-12 shrink-0 bg-slate-600 font-bold text-white'
+                className='w-12 shrink-0 bg-slate-600 font-bold text-white hover:bg-slate-700 active:bg-slate-500'
                 onClick={() => removeTag(index)}
               >
                 削除
