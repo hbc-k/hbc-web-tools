@@ -1,14 +1,7 @@
 'use client';
 import styles from './tag.module.scss';
 import localFont from 'next/font/local';
-import { Noto_Sans_JP } from 'next/font/google';
 import { useEffect, useRef } from 'react';
-
-const notoSansJP = Noto_Sans_JP({
-  weight: ['400', '500', '900'],
-  subsets: ['latin'],
-  variable: '--font-noto-sans-jp',
-});
 
 const bahnschrift = localFont({
   src: './bahnschrift.woff2',
@@ -48,7 +41,7 @@ export function Tag(props: Partial<TagProps>) {
   });
 
   return (
-    <article className={`${notoSansJP.variable} ${bahnschrift.variable} ${styles.tag}`}>
+    <article className={`${bahnschrift.variable} ${styles.tag}`}>
       <div className={styles.background}>
         <div className={styles.backgroundWrapper}>
           <div className={styles.backgroundCyanBox} />
@@ -73,7 +66,7 @@ export function Tag(props: Partial<TagProps>) {
             {role.ja && (
               <div className={styles.roleItem}>
                 <p ref={roleJaRef} className={styles.roleJa}>
-                  {role.ja.split('').map((char, index) => (
+                  {Array.from(role.ja).map((char, index) => (
                     <span key={index} className={styles.roleJaChar}>
                       {char}
                     </span>
@@ -85,7 +78,7 @@ export function Tag(props: Partial<TagProps>) {
             {role.en && (
               <div className={styles.roleItem}>
                 <p ref={roleEnRef} className={styles.roleEn}>
-                  {role.en.split('').map((char, index) => (
+                  {Array.from(role.en).map((char, index) => (
                     <span key={index} className={styles.roleEnChar}>
                       {char}
                     </span>

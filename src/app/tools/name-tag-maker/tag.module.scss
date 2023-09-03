@@ -1,6 +1,6 @@
 .tag {
-  --font-ja: var(--font-noto-sans-jp), sans-serif;
-  --font-en: 'Bahnschrift', var(--font-bahnschrift), var(--font-noto-sans-jp), sans-serif;
+  --font-ja: var(--font-noto-sans-jp), var(--font-noto-color-emoji), sans-serif;
+  --font-en: 'Bahnschrift', var(--font-ja);
   --frame-top-content-height: 14mm;
   --frame-top-padding-top: 2mm;
   --frame-bottom-content-height: 6mm;
