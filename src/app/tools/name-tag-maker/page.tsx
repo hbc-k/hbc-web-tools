@@ -5,9 +5,11 @@ export const metadata: Metadata = {
   title: 'イベント名札メーカー',
   description: 'イベント用の名札を制作するツールです。',
   openGraph: {
+    type: 'website',
     url: 'https://hbc-web-tools.vercel.app/tools/name-tag-maker',
     title: 'イベント名札メーカー',
     description: 'イベント用の名札を制作するツールです。',
+    siteName: 'hbc-web-tools',
   },
 };
 
