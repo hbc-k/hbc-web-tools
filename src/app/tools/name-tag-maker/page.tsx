@@ -3,6 +3,12 @@ import { Maker } from './maker';
 
 export const metadata: Metadata = {
   title: 'イベント名札メーカー',
+  description: 'イベント用の名札を制作するツールです。',
+  openGraph: {
+    url: 'https://hbc-web-tools.vercel.app/tools/name-tag-maker',
+    title: 'イベント名札メーカー',
+    description: 'イベント用の名札を制作するツールです。',
+  },
 };
 
 export default function Page() {

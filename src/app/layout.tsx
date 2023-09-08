@@ -7,6 +7,14 @@ export const metadata: Metadata = {
     default: 'hbc-web-tools',
     template: '%s | hbc-web-tools',
   },
+  description: '県広放送部員のためのオンラインツール',
+  openGraph: {
+    type: 'website',
+    url: 'https://hbc-web-tools.vercel.app/',
+    title: 'hbc-web-tools',
+    description: '県広放送部員のためのオンラインツール',
+    siteName: 'hbc-web-tools',
+  },
 };
 
 const notoColorEmoji = Noto_Color_Emoji({
