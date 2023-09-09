@@ -1,8 +1,20 @@
 import { Metadata } from 'next';
 import { Maker } from './maker';
+import { url, siteName } from '@/app/layout';
+
+const title = 'イベント名札メーカー';
+const description = 'イベント用の名札を制作するツールです。';
 
 export const metadata: Metadata = {
-  title: 'イベント名札メーカー',
+  title,
+  description,
+  openGraph: {
+    type: 'website',
+    url: `${url}/tools/name-tag-maker`,
+    title: `${title} | ${siteName}`,
+    description,
+    siteName,
+  },
 };
 
 export default function Page() {
