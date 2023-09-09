@@ -1,15 +1,19 @@
 import { Metadata } from 'next';
 import { Maker } from './maker';
+import { url, siteName } from '@/app/layout';
+
+const title = 'イベント名札メーカー';
+const description = 'イベント用の名札を制作するツールです。';
 
 export const metadata: Metadata = {
-  title: 'イベント名札メーカー',
-  description: 'イベント用の名札を制作するツールです。',
+  title,
+  description,
   openGraph: {
     type: 'website',
-    url: 'https://hbc-web-tools.vercel.app/tools/name-tag-maker',
-    title: 'イベント名札メーカー',
-    description: 'イベント用の名札を制作するツールです。',
-    siteName: 'hbc-web-tools',
+    url: `${url}/tools/name-tag-maker`,
+    title: `${title} | ${siteName}`,
+    description,
+    siteName,
   },
 };
 

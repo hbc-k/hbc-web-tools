@@ -2,18 +2,25 @@ import './globals.scss';
 import type { Metadata } from 'next';
 import { Noto_Color_Emoji, Noto_Sans_JP, Noto_Sans_Mono } from 'next/font/google';
 
+const url = process.env.VERCEL_URL && `https://${process.env.VERCEL_URL}`;
+const defaultTitle = 'hbc-web-tools';
+const defaultDescription = '県広放送部員のためのオンラインツール';
+const siteName = 'hbc-web-tools';
+
+export { url, siteName, defaultTitle, defaultDescription };
+
 export const metadata: Metadata = {
   title: {
-    default: 'hbc-web-tools',
-    template: '%s | hbc-web-tools',
+    default: defaultTitle,
+    template: `%s | ${siteName}`,
   },
-  description: '県広放送部員のためのオンラインツール',
+  description: defaultDescription,
   openGraph: {
     type: 'website',
-    url: 'https://hbc-web-tools.vercel.app/',
-    title: 'hbc-web-tools',
-    description: '県広放送部員のためのオンラインツール',
-    siteName: 'hbc-web-tools',
+    url,
+    title: `${defaultTitle} | ${siteName}`,
+    description: defaultDescription,
+    siteName,
   },
 };
 
