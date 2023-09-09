@@ -125,7 +125,7 @@ export function Maker() {
   }, []);
 
   return (
-    <>
+    <div className='min-w-[296.7mm]'>
       <section className='mx-auto my-6 max-w-7xl px-4'>
         <header className='my-2 flex items-end justify-between'>
           <div>
@@ -450,6 +450,6 @@ export function Maker() {
           </button>
         </footer>
       </section>
-    </>
+    </div>
   );
 }
